@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nienawidze Bajojajo.eu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    #hamster {
+      width: 200px;
+      height: 200px;
+      background-image: url('chomiczek.png'); /* Zamień na odpowiednie zdjęcie chomika */
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    #hamster:active {
+      transform: scale(0.95); /* Delikatne zmniejszenie przy kliknięciu */
+    }
+
+    h1 {
+      color: #333;
+      font-size: 1.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Kliknij na chomika!</h1>
+  <div id="hamster"></div>
+
+  <!-- Dźwięk -->
+  <audio id="clickSound" src="pou-no-sound-effect.mp3"></audio>
+
+  <script>
+    const hamster = document.getElementById("hamster");
+    const clickSound = document.getElementById("clickSound");
+
+    // Odtwarzaj dźwięk przy kliknięciu na chomika
+    hamster.addEventListener("click", () => {
+      clickSound.play();
+    });
+  </script>
+
+</body>
+</html>
