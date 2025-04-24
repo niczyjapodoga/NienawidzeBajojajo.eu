@@ -6,50 +6,65 @@
   <title>NienawidzeBajojajo.eu</title>
   <style>
     body {
-     background-color: #f0f8ff;
+      background-color: #f0f8ff;
+      background-image: url('susi.png');
+      background-size: cover;
+      background-repeat: no-repeat;
       margin: 0;
       padding: 0;
+      height: 200vh; /* żeby było w ogóle co przewijać */
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       flex-direction: column;
-      text-align: center;
-      transition: background-color 0.5s ease;
-      font-family: Arial, sans-serif;
+      transition: background-color 1s ease;
+    }
+
+    @keyframes colorChange {
+      0% { background-color: #f0f8ff; }
+      25% { background-color: #ffe0e9; }
+      50% { background-color: #d4fc79; }
+      75% { background-color: #a18cd1; }
+      100% { background-color: #f0f8ff; }
+    }
+
+    .color-change {
+      animation: colorChange 3s linear infinite;
     }
 
     #hamster {
       width: 200px;
       height: 200px;
-      background-image: url('chomiczek.png');
+      background-image: url('chomiczek.png'); /* Twoje zdjęcie chomika */
       background-size: cover;
       background-position: center;
-      cursor: pointer;
       border-radius: 50%;
+      cursor: pointer;
       transition: transform 0.2s ease-in-out;
     }
 
-    #hamster:active {
-      transform: scale(0.95);
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px) rotate(15deg); }
+    }
+
+    .hamster-bounce {
+      animation: bounce 0.6s ease;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hamster-spin {
+      animation: spin 1s linear;
     }
 
     h1 {
+      font-family: Arial, sans-serif;
       color: #333;
-      font-size: 1.8rem;
-    }
-
-    /* Animacja podskoku */
-    @keyframes shake {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      25% { transform: translate(5px, -5px) rotate(5deg); }
-      50% { transform: translate(-5px, 5px) rotate(-5deg); }
-      75% { transform: translate(5px, -5px) rotate(5deg); }
-      100% { transform: translate(0, 0) rotate(0deg); }
-    }
-
-    .jump {
-      animation: shake 0.5s ease;
+      margin-top: 50px;
     }
   </style>
 </head>
@@ -64,23 +79,21 @@
     const clickSound = document.getElementById("clickSound");
     const body = document.body;
 
-    const colors = ["#f0f8ff", "#ffdde1", "#d4fc79", "#a18cd1", "#fbc2eb", "#fad0c4"];
-
     hamster.addEventListener("click", () => {
-      // Odtwarzaj dźwięk
       clickSound.play();
+      body.classList.add("color-change");
+      hamster.classList.add("hamster-bounce");
+      setTimeout(() => {
+        hamster.classList.remove("hamster-bounce");
+      }, 600);
+    });
 
-      // Losowa zmiana koloru tła
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      body.style.backgroundColor = randomColor;
-
-      // Dodanie animacji do chomika
-      hamster.classList.add("jump");
-
-      // Usunięcie animacji po zakończeniu, żeby można było kliknąć ponownie
-      hamster.addEventListener("animationend", () => {
-        hamster.classList.remove("jump");
-      }, { once: true });
+    // Scroll event – obracanie chomika
+    window.addEventListener("scroll", () => {
+      hamster.classList.add("hamster-spin");
+      setTimeout(() => {
+        hamster.classList.remove("hamster-spin");
+      }, 1000);
     });
   </script>
 </body>
