@@ -7,6 +7,8 @@
   <style>
     body {
       background-image: url('susi.png');
+      background-repeat: repeat;
+      background-size: cover;
       font-family: Arial, sans-serif;
       background-color: #f0f8ff;
       margin: 0;
@@ -17,6 +19,35 @@
       height: 100vh;
       flex-direction: column;
       text-align: center;
+      transition: background-color 1s ease;
+    }
+
+    /* Animacja przesuwania tła */
+    @keyframes moveBackground {
+      0% {
+        background-position: 0 0;
+        background-color: #f0f8ff;
+      }
+      25% {
+        background-position: 50px 50px;
+        background-color: #ffdde1;
+      }
+      50% {
+        background-position: 100px 0;
+        background-color: #d4fc79;
+      }
+      75% {
+        background-position: 50px -50px;
+        background-color: #a18cd1;
+      }
+      100% {
+        background-position: 0 0;
+        background-color: #f0f8ff;
+      }
+    }
+
+    .animated-bg {
+      animation: moveBackground 5s linear infinite;
     }
 
     #hamster {
@@ -25,13 +56,13 @@
       background-image: url('chomiczek.png'); /* Zamień na odpowiednie zdjęcie chomika */
       background-size: cover;
       background-position: center;
-      cursor: url("https://www.flaticon.com/free-icons/drag"), auto; /* Własny kursor pięści */
+      cursor: url("https://www.flaticon.com/free-icons/drag"), auto;
       border-radius: 50%;
       transition: transform 0.2s ease-in-out;
     }
 
     #hamster:active {
-      transform: scale(0.95); /* Delikatne zmniejszenie przy kliknięciu */
+      transform: scale(0.95);
     }
 
     h1 {
@@ -41,8 +72,7 @@
   </style>
 </head>
 <body>
-  <cursor: url("cursor.png"), default
-  <h1></h1>
+  <h1>Kliknij chomika!</h1>
   <div id="hamster"></div>
 
   <!-- Dźwięk -->
@@ -51,12 +81,15 @@
   <script>
     const hamster = document.getElementById("hamster");
     const clickSound = document.getElementById("clickSound");
+    const body = document.body;
 
-    // Odtwarzaj dźwięk przy kliknięciu na chomika
+    // Odtwarzaj dźwięk przy kliknięciu na chomika + dodaj animację tła
     hamster.addEventListener("click", () => {
       clickSound.play();
+      body.classList.toggle("animated-bg"); // Dodaje lub usuwa animację tła
     });
   </script>
 
 </body>
 </html>
+
