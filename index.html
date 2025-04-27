@@ -57,13 +57,28 @@
       transition: transform 0.3s ease-in-out; /* Płynna animacja kliknięcia */
     }
 
-    @keyframes sweetBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); } /* Zwiększenie wysokości podskoku */
+    /* Animacja podskakiwania */
+    @keyframes smoothBounce {
+      0% {
+        transform: translateY(0);
+      }
+      25% {
+        transform: translateY(-10px);
+      }
+      50% {
+        transform: translateY(0);
+      }
+      75% {
+        transform: translateY(-5px);
+      }
+      100% {
+        transform: translateY(0);
+      }
     }
 
+    /* Klasa aktywująca animację */
     .hamster-bounce {
-      animation: sweetBounce 0.6s ease; /* Gładka animacja podskoku */
+      animation: smoothBounce 0.8s ease; /* Zwiększyłem czas na bardziej gładki efekt */
     }
 
     h1 {
@@ -94,12 +109,13 @@
       // Dodanie zmiany koloru tła
       body.classList.add("color-change");
 
-      // Resetowanie poprzedniej animacji, aby zawsze zaczynała się od nowa
-      hamster.style.animation = "none";
-      // Opóźnienie, aby animacja działała płynnie
+      // Dodanie animacji podskoku
+      hamster.classList.add("hamster-bounce");
+
+      // Po zakończeniu animacji, usuwamy klasę, aby animacja mogła się powtórzyć przy kolejnym kliknięciu
       setTimeout(() => {
-        hamster.classList.add("hamster-bounce");
-      }, 100); // 100ms to czas na "zresetowanie" animacji
+        hamster.classList.remove("hamster-bounce");
+      }, 800); // Czas trwania animacji, aby usunąć klasę po jej zakończeniu
     });
 
     // Zaktualizowane tła
