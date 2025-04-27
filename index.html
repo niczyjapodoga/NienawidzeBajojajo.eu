@@ -81,19 +81,39 @@
       margin-top: 50px;
     }
 
-    /* Stylowanie okna dialogowego */
-    .popup {
-      position: absolute;
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Stylowanie przycisków */
+    .button {
+      padding: 10px 20px;
       font-size: 16px;
-      font-weight: bold;
-      color: #333;
-      max-width: 250px;
-      text-align: center;
+      margin: 10px;
+      background-color: #ff6600;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #ff9933;
+    }
+
+    /* Stylowanie wideo */
+    #videoContainer {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
       display: none;
+      z-index: 10;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #videoElement {
+      width: 600px;
+      height: 400px;
     }
   </style>
 </head>
@@ -106,6 +126,17 @@
     <div id="smallHamster"></div>
   </a>
 
+  <!-- Przycisk odtwarzania filmu -->
+  <button class="button" id="playVideoButton">Nie Klikaj!</button>
+
+  <!-- Kontener dla wideo -->
+  <div id="videoContainer">
+    <video id="videoElement" controls>
+      <source src="frytka.mp4" type="video/mp4">
+      Twoja przeglądarka nie obsługuje wideo.
+    </video>
+  </div>
+
   <audio id="clickSound" src="pou-no-sound-effect.mp3"></audio>
   <audio id="backgroundMusic" src="worlds-smallest-violin.mp3" loop></audio>
 
@@ -116,6 +147,10 @@
     const backgroundMusic = document.getElementById("backgroundMusic");
     const body = document.body;
     const overlay = document.getElementById("overlay");
+
+    const playVideoButton = document.getElementById("playVideoButton");
+    const videoContainer = document.getElementById("videoContainer");
+    const videoElement = document.getElementById("videoElement");
 
     let musicPlayed = false;
 
@@ -165,41 +200,16 @@
       setInterval(changeBackground, 3000);
     }, 2000);
 
-    // Teksty dialogowe
-    const popupMessages = [
-      "Słabo Klikasz😂",
-      "Fryty Belgijskie Z Majonezem",
-      "Nie Bij Mnie😣",
-      "Bajojajojojajo.eu",
-      "Czy wiesz, że Donat Milka Ma 25 tys kg Cukru?",
-      "Zjadłbym Rodego Bo Rode To Donat Milka Czekoladowy!"
-    ];
+    // Obsługa przycisku do odtwarzania wideo
+    playVideoButton.addEventListener("click", () => {
+      videoContainer.style.display = "block"; // Pokazanie kontenera wideo
+      videoElement.play(); // Rozpoczęcie odtwarzania filmu
+    });
 
-    // Funkcja losująca teksty i wyświetlająca je w pop-upach
-    function showPopup() {
-      const randomMessage = popupMessages[Math.floor(Math.random() * popupMessages.length)];
-      const popup = document.createElement("div");
-      popup.classList.add("popup");
-      popup.textContent = randomMessage;
-
-      // Ustawienie losowej pozycji okna
-      popup.style.top = `${Math.random() * 80 + 10}%`; // Losowa pozycja od 10% do 90% ekranu
-      popup.style.left = `${Math.random() * 80 + 10}%`; // Losowa pozycja od 10% do 90% ekranu
-
-      document.body.appendChild(popup);
-
-      // Pokaż okno dialogowe na 2 sekundy, potem zniknie
-      setTimeout(() => {
-        popup.style.display = "block";
-        setTimeout(() => {
-          popup.style.display = "none";
-        }, 2000); // Okno zniknie po 2 sekundach
-      }, 500);
-    }
-
-    // Co 5 sekund wyświetla losowe okno
-    setInterval(showPopup, 5000);
-
+    // Jeśli filmik się skończy, ukrywamy kontener
+    videoElement.addEventListener("ended", () => {
+      videoContainer.style.display = "none";
+    });
   </script>
 </body>
 </html>
