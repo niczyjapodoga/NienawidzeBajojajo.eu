@@ -150,10 +150,18 @@
     function changeBackground() {
       overlay.style.opacity = 0;
       setTimeout(() => {
+        // Sprawdź, czy tło jest takie samo jak poprzednie
+        if (currentBg === 0) {
+          // Pomiń to samo tło (Zrzut ekranu) i przejdź do kolejnego
+          currentBg = 1;
+        } else if (currentBg === 1) {
+          currentBg = 2;
+        } else {
+          currentBg = 0;
+        }
         overlay.style.backgroundImage = `url('${backgrounds[currentBg].src}')`;
         overlay.style.backgroundPosition = backgrounds[currentBg].position;
         overlay.style.opacity = 1;
-        currentBg = (currentBg + 1) % backgrounds.length;
       }, 1000);
     }
 
