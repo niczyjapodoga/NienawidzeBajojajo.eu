@@ -80,6 +80,21 @@
       color: #333;
       margin-top: 50px;
     }
+
+    /* Stylowanie okna dialogowego */
+    .popup {
+      position: absolute;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      max-width: 250px;
+      text-align: center;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -135,7 +150,6 @@
       overlay.style.opacity = 0;
 
       setTimeout(() => {
-        // Zmieniamy tło z pierwszego na drugie, pomijając tło, które było wcześniej
         currentBg = (currentBg + 1) % backgrounds.length;
 
         overlay.style.backgroundImage = `url('${backgrounds[currentBg].src}')`;
@@ -150,6 +164,41 @@
     setTimeout(() => {
       setInterval(changeBackground, 3000);
     }, 2000);
+
+    // Teksty dialogowe
+    const popupMessages = [
+      "Chcesz zobaczyć jak podskakuje?",
+      "Chomiki uwielbiają biegać w kółko!",
+      "Czas na mały skok! 🐹",
+      "Kliknij chomika, aby zobaczyć jego magiczny skok!",
+      "Czy wiesz, że chomiki potrafią spać do 16 godzin dziennie?",
+      "Zobacz jak chomik skacze! 🐾"
+    ];
+
+    // Funkcja losująca teksty i wyświetlająca je w pop-upach
+    function showPopup() {
+      const randomMessage = popupMessages[Math.floor(Math.random() * popupMessages.length)];
+      const popup = document.createElement("div");
+      popup.classList.add("popup");
+      popup.textContent = randomMessage;
+
+      // Ustawienie losowej pozycji okna
+      popup.style.top = `${Math.random() * 80 + 10}%`; // Losowa pozycja od 10% do 90% ekranu
+      popup.style.left = `${Math.random() * 80 + 10}%`; // Losowa pozycja od 10% do 90% ekranu
+
+      document.body.appendChild(popup);
+
+      // Pokaż okno dialogowe na 2 sekundy, potem zniknie
+      setTimeout(() => {
+        popup.style.display = "block";
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 2000); // Okno zniknie po 2 sekundach
+      }, 500);
+    }
+
+    // Co 5 sekund wyświetla losowe okno
+    setInterval(showPopup, 5000);
 
   </script>
 </body>
