@@ -121,7 +121,7 @@
   </a>
 
   <audio id="clickSound" src="pou-no-sound-effect.mp3"></audio>
-  <audio id="backgroundMusic" src="world-smallest-violin.mp3"></audio>
+  <audio id="backgroundMusic" src="worlds-smallest-violin"></audio>
 
   <script>
     const hamster = document.getElementById("hamster");
@@ -163,9 +163,9 @@
 
     // Zaktualizowane tła
     const backgrounds = [
+      { src: "Zrzut ekranu 2025-04-27 144753.png", position: "center top -350px" },  /* Zrzut ekranu na początku */
       { src: "chomikchinczyk.jpg", position: "center top -550px" },  /* Chomikchinczyk bardzo wysoko */
-      { src: "susi.png", position: "center top -200px" },
-      { src: "Zrzut ekranu 2025-04-27 144753.png", position: "center top -350px" }
+      { src: "susi.png", position: "center top -200px" }
     ];
     let currentBg = 0;
 
@@ -181,6 +181,7 @@
 
     setInterval(changeBackground, 3000);
 
+    // Ustawienie początkowego tła
     overlay.style.backgroundImage = `url('${backgrounds[0].src}')`;
     overlay.style.backgroundPosition = backgrounds[0].position;
   </script>
