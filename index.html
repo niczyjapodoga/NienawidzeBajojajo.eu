@@ -16,9 +16,10 @@
       height: 100vh;
       background-size: cover;
       background-repeat: no-repeat;
-      background-position: center top -350px; /* Zrzut ekranu na początku */
+      background-position: center top -350px; /* Początkowe tło - Zrzut ekranu */
       transition: background-image 1s ease-in-out;
       cursor: url('cursor.png'), auto; /* Zmieniony kursor */
+      font-family: Arial, sans-serif;
     }
 
     #overlay {
@@ -28,7 +29,7 @@
       width: 100%;
       height: 100%;
       background-size: cover;
-      background-position: center top -350px; /* Zrzut ekranu */
+      background-position: center top -350px; /* Początkowe tło */
       opacity: 1;
       z-index: -1;
       transition: opacity 1s ease-in-out;
@@ -47,32 +48,24 @@
     }
 
     #hamster {
-      width: 150px; /* Większy chomik na środku */
+      width: 150px;
       height: 150px;
       background-image: url('chomiczek.png');
       background-size: cover;
       background-position: center;
       cursor: pointer;
-      transition: transform 0.3s ease-in-out; /* Płynna animacja kliknięcia */
+      transition: transform 0.3s ease-in-out;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Cieniowanie chomika */
+      border-radius: 50%; /* Zaokrąglone rogi dla chomika */
     }
 
     /* Animacja podskakiwania */
     @keyframes smoothBounce {
-      0% {
-        transform: translateY(0);
-      }
-      25% {
-        transform: translateY(-10px);
-      }
-      50% {
-        transform: translateY(0);
-      }
-      75% {
-        transform: translateY(-5px);
-      }
-      100% {
-        transform: translateY(0);
-      }
+      0% { transform: translateY(0); }
+      25% { transform: translateY(-15px); }
+      50% { transform: translateY(0); }
+      75% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
     }
 
     .hamster-bounce {
@@ -81,25 +74,45 @@
 
     /* Stylizacja małego chomika po lewej stronie */
     #smallHamster {
-      width: 60px; /* Mały chomik */
+      width: 60px;
       height: 60px;
       background-image: url('chomiczek.png');
       background-size: cover;
       background-position: center;
       position: absolute;
-      left: 20px; /* Chomik po lewej stronie */
-      animation: spin 2s linear infinite; /* Animacja kręcenia się chomika */
+      left: 20px;
+      animation: spin 2s linear infinite;
       cursor: pointer;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Cieniowanie */
+      border-radius: 50%; /* Zaokrąglone rogi */
     }
 
     /* Animacja kręcenia się chomika */
     @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Przycisk */
+    .button {
+      padding: 10px 20px;
+      background-color: #f39c12;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .button:hover {
+      background-color: #e67e22;
+      transform: translateY(-5px);
+    }
+
+    .button:active {
+      transform: translateY(2px);
     }
 
     h1 {
@@ -112,7 +125,7 @@
 <body>
   <div id="overlay"></div>
 
-  <h1></h1>
+  <h1>Witaj na stronie!</h1>
   <div id="hamster"></div>
 
   <!-- Mały chomik, który przenosi na bajojajo.eu -->
@@ -120,10 +133,10 @@
     <div id="smallHamster"></div>
   </a>
 
-  <!-- MP3, które odtwarza się automatycznie -->
-  <audio id="backgroundMusic" src="world-smallest-violin.mp3" autoplay loop></audio>
+  <button class="button" onclick="window.location.href='https://bajojajo.eu';">Przejdź na bajojajo.eu</button>
 
   <audio id="clickSound" src="pou-no-sound-effect.mp3"></audio>
+  <audio id="backgroundMusic" src="world-smallest-violin.mp3"></audio>
 
   <script>
     const hamster = document.getElementById("hamster");
@@ -135,6 +148,7 @@
 
     // Funkcja uruchamiająca muzykę i efekt animacji
     function playMusicAndAnimate() {
+      backgroundMusic.play();
       // Dodanie zmiany koloru tła
       body.classList.add("color-change");
 
