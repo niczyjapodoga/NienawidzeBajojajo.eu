@@ -16,9 +16,9 @@
       height: 100vh;
       background-size: cover;
       background-repeat: no-repeat;
-      background-position: center top -350px; /* Początkowe tło */
+      background-position: center top -350px;
       transition: background-image 1s ease-in-out;
-      cursor: url('cursor.png'), auto; /* Zmieniony kursor */
+      cursor: url('cursor.png'), auto;
       font-family: Arial, sans-serif;
     }
 
@@ -29,17 +29,16 @@
       width: 100%;
       height: 100%;
       background-size: cover;
-      background-position: center top -350px; /* Początkowe tło */
+      background-position: center top -350px;
       opacity: 1;
       z-index: -1;
       transition: opacity 1s ease-in-out;
     }
 
-    /* Styl chomika na środku */
     #hamster {
       width: 150px;
       height: 150px;
-      background-image: url('chomiczek.png'); /* Chomik bez tła */
+      background-image: url('chomiczek.png');
       background-size: cover;
       background-position: center;
       cursor: pointer;
@@ -47,49 +46,22 @@
       position: relative;
     }
 
-    /* Animacja podskakiwania chomika */
     @keyframes smoothBounce {
       0% { transform: translateY(0); }
-      25% { transform: translateY(-20px); }
+      25% { transform: translateY(-15px); }
       50% { transform: translateY(0); }
-      75% { transform: translateY(-10px); }
+      75% { transform: translateY(-5px); }
       100% { transform: translateY(0); }
     }
 
     .hamster-bounce {
-      animation: smoothBounce 0.6s ease;
+      animation: smoothBounce 0.8s ease;
     }
 
-    /* Akcesoria chomika - okulary */
-    .glasses {
-      position: absolute;
-      top: 30px;
-      left: 15px;
-      width: 40px;
-      height: 20px;
-      background-color: transparent;
-      border: 2px solid black;
-      border-radius: 10px;
-      z-index: 1;
-    }
-
-    /* Akcesoria chomika - czapka */
-    .hat {
-      position: absolute;
-      top: -20px;
-      left: 30px;
-      width: 50px;
-      height: 30px;
-      background-color: red;
-      border-radius: 10px 10px 0 0;
-      z-index: 1;
-    }
-
-    /* Mały chomik, który przenosi na bajojajo.eu */
     #smallHamster {
       width: 60px;
       height: 60px;
-      background-image: url('chomiczek.png'); /* Chomik bez tła */
+      background-image: url('chomiczek.png');
       background-size: cover;
       background-position: center;
       position: absolute;
@@ -98,7 +70,6 @@
       cursor: pointer;
     }
 
-    /* Animacja kręcenia się chomika */
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
@@ -114,14 +85,8 @@
 <body>
   <div id="overlay"></div>
 
-  <!-- Chomik na środku -->
-  <div id="hamster">
-    <!-- Akcesoria chomika -->
-    <div class="glasses"></div>
-    <div class="hat"></div>
-  </div>
+  <div id="hamster"></div>
 
-  <!-- Mały chomik, który przenosi na bajojajo.eu -->
   <a href="https://bajojajo.eu" target="_blank">
     <div id="smallHamster"></div>
   </a>
@@ -137,59 +102,55 @@
     const body = document.body;
     const overlay = document.getElementById("overlay");
 
-    let musicPlayed = false; // Zmienna, która sprawdza, czy muzyka była już uruchomiona
+    let musicPlayed = false;
 
-    // Funkcja uruchamiająca muzykę i efekt animacji
     function playMusicAndAnimate() {
-      // Sprawdzenie, czy muzyka już gra
       if (!musicPlayed) {
-        backgroundMusic.play(); // Rozpocznij odtwarzanie muzyki w pętli
-        musicPlayed = true; // Oznaczamy, że muzyka została już odtworzona
+        backgroundMusic.play();
+        musicPlayed = true;
       }
 
-      // Dodanie animacji podskoku
       hamster.classList.add("hamster-bounce");
 
-      // Po zakończeniu animacji, usuwamy klasę, aby animacja mogła się powtórzyć przy kolejnym kliknięciu
       setTimeout(() => {
         hamster.classList.remove("hamster-bounce");
-      }, 600); // Czas trwania animacji, aby usunąć klasę po jej zakończeniu
+      }, 800);
 
-      // Odtwarzanie dźwięku "Pou-no Sound Effect"
       clickSound.play();
     }
 
-    // Animacja przy kliknięciu w chomika
     hamster.addEventListener("click", () => {
-      // Jeśli muzyka jeszcze nie gra, uruchamiamy ją i dodajemy animację
       playMusicAndAnimate();
     });
 
-    // Zaktualizowane tła
     const backgrounds = [
       { src: "Zrzut ekranu 2025-04-27 144753.png", position: "center top -350px" },
       { src: "chomikchinczyk.jpg", position: "center top -550px" },
       { src: "susi.png", position: "center top -200px" }
     ];
+
     let currentBg = 0;
 
     function changeBackground() {
       overlay.style.opacity = 0;
+
       setTimeout(() => {
+        // Zmieniamy tło z pierwszego na drugie, pomijając tło, które było wcześniej
+        currentBg = (currentBg + 1) % backgrounds.length;
+
         overlay.style.backgroundImage = `url('${backgrounds[currentBg].src}')`;
         overlay.style.backgroundPosition = backgrounds[currentBg].position;
         overlay.style.opacity = 1;
-        currentBg = (currentBg + 1) % backgrounds.length;
       }, 1000);
     }
 
-    // Ustawienie początkowego tła
     overlay.style.backgroundImage = `url('${backgrounds[0].src}')`;
     overlay.style.backgroundPosition = backgrounds[0].position;
 
     setTimeout(() => {
-      setInterval(changeBackground, 3000); // Zmiana tła co 3 sekundy
-    }, 2000);  // Początkowe tło przez 2 sekundy
+      setInterval(changeBackground, 3000);
+    }, 2000);
+
   </script>
 </body>
 </html>
