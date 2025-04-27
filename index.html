@@ -178,25 +178,26 @@
       videoContainer.style.display = "flex";
       videoElement.play();
 
-      const fadeOut = setInterval(() => {
-        if (backgroundMusic.volume > 0.2) {
-          backgroundMusic.volume -= 0.02;
-        } else {
-          clearInterval(fadeOut);
-        }
-      }, 100);
+const fadeOut = setInterval(() => {
+  if (backgroundMusic.volume > 0.03) {
+    backgroundMusic.volume -= 0.02;
+  } else {
+    backgroundMusic.volume = 0.01; // zostaje ledwo słyszalna
+    clearInterval(fadeOut);
+  }
+}, 100);
     });
 
     videoElement.addEventListener("ended", () => {
       videoContainer.style.display = "none";
-      const fadeIn = setInterval(() => {
-        if (backgroundMusic.volume < 1.0) {
-          backgroundMusic.volume += 0.02;
-        } else {
-          backgroundMusic.volume = 1.0;
-          clearInterval(fadeIn);
-        }
-      }, 100);
+     const fadeIn = setInterval(() => {
+  if (backgroundMusic.volume < 1.0) {
+    backgroundMusic.volume += 0.02;
+  } else {
+    backgroundMusic.volume = 1.0;
+    clearInterval(fadeIn);
+  }
+}, 100);
     });
   </script>
 </body>
