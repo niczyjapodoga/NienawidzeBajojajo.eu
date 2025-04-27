@@ -16,7 +16,7 @@
       height: 100vh;
       background-size: cover;
       background-repeat: no-repeat;
-      background-position: center top -200px;
+      background-position: center top -350px; /* Zrzut ekranu na początku */
       transition: background-image 1s ease-in-out;
       cursor: url('cursor.png'), auto; /* Zmieniony kursor */
     }
@@ -28,7 +28,7 @@
       width: 100%;
       height: 100%;
       background-size: cover;
-      background-position: center top -550px; /* Chomikchinczyk bardzo wysoko */
+      background-position: center top -350px; /* Zrzut ekranu */
       opacity: 1;
       z-index: -1;
       transition: opacity 1s ease-in-out;
@@ -47,14 +47,14 @@
     }
 
     #hamster {
-      width: 200px;
-      height: 200px;
+      width: 80px; /* Mały rozmiar chomika */
+      height: 80px;
       background-image: url('chomiczek.png');
       background-size: cover;
       background-position: center;
-      border-radius: 50%;
       cursor: pointer;
       transition: transform 0.3s ease-in-out; /* Płynna animacja kliknięcia */
+      margin-top: 50px;
     }
 
     /* Animacja podskakiwania */
@@ -85,25 +85,22 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 150px;
-      height: 150px;
+      width: 80px; /* Mały przycisk */
+      height: 80px;
       background-image: url('chomiczek.png'); /* Obrazek chomika jako tło */
       background-size: cover;
       background-position: center;
-      border-radius: 50%;
       border: none;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animacja dla efektu hover */
       margin-top: 20px;
     }
 
-    /* Animacja przycisku na hover */
     .button:hover {
       transform: scale(1.1); /* Powiększenie przycisku */
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Cień wokół przycisku */
     }
 
-    /* Stylizacja napisu */
     h1 {
       font-family: Arial, sans-serif;
       color: #333;
@@ -117,23 +114,24 @@
   <h1></h1>
   <div id="hamster"></div>
 
-  <!-- Przycisk, który przenosi na stronę bajojajo.eu -->
+  <!-- Przycisk z chomikiem, który przenosi na stronę bajojajo.eu -->
   <a href="https://bajojajo.eu" target="_blank">
     <button class="button"></button>
   </a>
 
   <audio id="clickSound" src="pou-no-sound-effect.mp3"></audio>
+  <audio id="backgroundMusic" src="world-smallest-violin.mp3"></audio>
 
   <script>
     const hamster = document.getElementById("hamster");
     const clickSound = document.getElementById("clickSound");
+    const backgroundMusic = document.getElementById("backgroundMusic");
     const body = document.body;
     const overlay = document.getElementById("overlay");
 
-    hamster.addEventListener("click", () => {
-      // Odtwarzanie dźwięku przy kliknięciu
-      clickSound.play();
-      
+    // Funkcja uruchamiająca muzykę i efekt animacji
+    function playMusicAndAnimate() {
+      backgroundMusic.play();
       // Dodanie zmiany koloru tła
       body.classList.add("color-change");
 
@@ -144,6 +142,21 @@
       setTimeout(() => {
         hamster.classList.remove("hamster-bounce");
       }, 800); // Czas trwania animacji, aby usunąć klasę po jej zakończeniu
+    }
+
+    // Po załadowaniu strony
+    window.onload = () => {
+      // Odtwarzanie muzyki po załadowaniu strony
+      playMusicAndAnimate();
+    };
+
+    // Animacja przy kliknięciu w chomika
+    hamster.addEventListener("click", () => {
+      // Odtwarzanie dźwięku przy kliknięciu
+      clickSound.play();
+      
+      // Muzyka i animacja po kliknięciu
+      playMusicAndAnimate();
     });
 
     // Zaktualizowane tła
