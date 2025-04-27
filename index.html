@@ -120,8 +120,10 @@
     <div id="smallHamster"></div>
   </a>
 
+  <!-- MP3, które odtwarza się automatycznie -->
+  <audio id="backgroundMusic" src="world-smallest-violin.mp3" autoplay loop></audio>
+
   <audio id="clickSound" src="pou-no-sound-effect.mp3"></audio>
-  <audio id="backgroundMusic" src="worlds-smallest-violin"></audio>
 
   <script>
     const hamster = document.getElementById("hamster");
@@ -133,7 +135,6 @@
 
     // Funkcja uruchamiająca muzykę i efekt animacji
     function playMusicAndAnimate() {
-      backgroundMusic.play();
       // Dodanie zmiany koloru tła
       body.classList.add("color-change");
 
