@@ -18,6 +18,7 @@
       background-repeat: no-repeat;
       background-position: center top -200px;
       transition: background-image 1s ease-in-out;
+      cursor: url('cursor.png'), auto; /* Zmieniony kursor */
     }
 
     #overlay {
@@ -27,7 +28,7 @@
       width: 100%;
       height: 100%;
       background-size: cover;
-      background-position: center top -200px;
+      background-position: center top -500px; /* Chomikchinczyk bardzo wysoko */
       opacity: 1;
       z-index: -1;
       transition: opacity 1s ease-in-out;
@@ -46,7 +47,6 @@
     }
 
     #hamster {
-     cursor: url('cursor.png'), pointer;
       width: 200px;
       height: 200px;
       background-image: url('chomiczek.png');
@@ -103,7 +103,7 @@
     });
 
     const backgrounds = [
-      { src: "chomikchinczyk.jpg", position: "center top -250px" },
+      { src: "chomikchinczyk.jpg", position: "center top -500px" },  /* Chomikchinczyk bardzo wysoko */
       { src: "susi.png", position: "center top -200px" },
       { src: "Zrzut ekranu 2025-04-27 144753.png", position: "center top -230px" }
     ];
