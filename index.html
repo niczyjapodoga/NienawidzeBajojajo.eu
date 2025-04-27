@@ -150,11 +150,14 @@
       }, 1000);
     }
 
-    setInterval(changeBackground, 3000);
-
     // Ustawienie początkowego tła
     overlay.style.backgroundImage = `url('${backgrounds[0].src}')`;
     overlay.style.backgroundPosition = backgrounds[0].position;
+
+    setTimeout(() => {
+      setInterval(changeBackground, 3000); // Zmiana tła co 3 sekundy
+    }, 2000);  // Początkowe tło przez 2 sekundy
+
   </script>
 </body>
 </html>
