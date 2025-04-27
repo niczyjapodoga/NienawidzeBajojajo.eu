@@ -44,7 +44,8 @@
       background-position: center;
       cursor: pointer;
       transition: transform 0.3s ease-in-out;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Cieniowanie chomika */
+      /* Usunięcie cieni */
+      box-shadow: none; 
     }
 
     /* Animacja podskakiwania */
@@ -71,7 +72,8 @@
       left: 20px;
       animation: spin 2s linear infinite;
       cursor: pointer;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Cieniowanie */
+      /* Usunięcie cieni */
+      box-shadow: none; 
     }
 
     /* Animacja kręcenia się chomika */
@@ -109,10 +111,15 @@
     const body = document.body;
     const overlay = document.getElementById("overlay");
 
+    let musicPlayed = false; // Zmienna, która sprawdza, czy muzyka była już uruchomiona
+
     // Funkcja uruchamiająca muzykę i efekt animacji
     function playMusicAndAnimate() {
-      // Rozpocznij odtwarzanie muzyki w pętli
-      backgroundMusic.play();
+      // Sprawdzenie, czy muzyka już gra
+      if (!musicPlayed) {
+        backgroundMusic.play(); // Rozpocznij odtwarzanie muzyki w pętli
+        musicPlayed = true; // Oznaczamy, że muzyka została już odtworzona
+      }
       
       // Dodanie animacji podskoku
       hamster.classList.add("hamster-bounce");
@@ -121,14 +128,14 @@
       setTimeout(() => {
         hamster.classList.remove("hamster-bounce");
       }, 800); // Czas trwania animacji, aby usunąć klasę po jej zakończeniu
+
+      // Odtwarzanie dźwięku "Pou-no Sound Effect"
+      clickSound.play();
     }
 
     // Animacja przy kliknięciu w chomika
     hamster.addEventListener("click", () => {
-      // Odtwarzanie dźwięku przy kliknięciu
-      clickSound.play();
-      
-      // Muzyka i animacja po kliknięciu
+      // Jeśli muzyka jeszcze nie gra, uruchamiamy ją i dodajemy animację
       playMusicAndAnimate();
     });
 
