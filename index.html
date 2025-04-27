@@ -10,6 +10,7 @@
       background-image: url('susi.png');
       background-size: cover;
       background-repeat: no-repeat;
+      background-position: center top -100px; /* PRZESUŃ TŁO DO GÓRY */
       margin: 0;
       padding: 0;
       overflow: hidden;
@@ -45,13 +46,16 @@
       animation: spin 2s linear infinite;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-30px) rotate(15deg); }
+    @keyframes bounceSweet {
+      0% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-20px) rotate(5deg); }
+      50% { transform: translateY(0) rotate(0deg); }
+      75% { transform: translateY(-15px) rotate(-5deg); }
+      100% { transform: translateY(0) rotate(0deg); }
     }
 
     .hamster-bounce {
-      animation: bounce 0.6s ease;
+      animation: bounceSweet 0.8s ease infinite;
     }
 
     @keyframes spin {
@@ -84,16 +88,9 @@
       // Wyłącz obracanie
       hamster.style.animation = "none";
 
-      // Dodaj podskakiwanie
+      // Dodaj słodkie podskakiwanie
       hamster.classList.add("hamster-bounce");
-
-      // Po podskoku wróć do obracania
-      setTimeout(() => {
-        hamster.classList.remove("hamster-bounce");
-        hamster.style.animation = "spin 2s linear infinite";
-      }, 600);
     });
   </script>
 </body>
 </html>
-
