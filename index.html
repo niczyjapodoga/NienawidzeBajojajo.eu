@@ -54,22 +54,16 @@
       background-position: center;
       border-radius: 50%;
       cursor: pointer;
-      transition: transform 0.2s ease-in-out;
-      animation: spin 2s linear infinite;
+      transition: transform 0.3s ease-in-out; /* Płynna animacja kliknięcia */
     }
 
     @keyframes sweetBounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+      50% { transform: translateY(-20px); } /* Zwiększenie wysokości podskoku */
     }
 
     .hamster-bounce {
-      animation: sweetBounce 0.6s ease infinite;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      animation: sweetBounce 0.6s ease; /* Gładka animacja podskoku */
     }
 
     h1 {
@@ -96,6 +90,8 @@
     hamster.addEventListener("click", () => {
       clickSound.play();
       body.classList.add("color-change");
+      
+      // Resetujemy animację, aby po każdym kliknięciu była płynna
       hamster.style.animation = "none";
       setTimeout(() => {
         hamster.classList.add("hamster-bounce");
@@ -103,9 +99,9 @@
     });
 
     const backgrounds = [
-      { src: "chomikchinczyk.jpg", position: "center top -500px" },  /* Chomikchinczyk bardzo wysoko */
+      { src: "chomikchinczyk.jpg", position: "center top -550px" },  /* Chomikchinczyk bardzo wysoko */
       { src: "susi.png", position: "center top -200px" },
-      { src: "Zrzut ekranu 2025-04-27 144753.png", position: "center top -230px" }
+      { src: "Zrzut ekranu 2025-04-27 144753.png", position: "center top -350px" }
     ];
     let currentBg = 0;
 
