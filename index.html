@@ -12,12 +12,13 @@
       background-repeat: no-repeat;
       margin: 0;
       padding: 0;
-      height: 200vh; /* żeby było w ogóle co przewijać */
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       transition: background-color 1s ease;
+      height: 100vh;
     }
 
     @keyframes colorChange {
@@ -35,12 +36,13 @@
     #hamster {
       width: 200px;
       height: 200px;
-      background-image: url('chomiczek.png'); /* Twoje zdjęcie chomika */
+      background-image: url('chomiczek.png');
       background-size: cover;
       background-position: center;
       border-radius: 50%;
       cursor: pointer;
       transition: transform 0.2s ease-in-out;
+      animation: spin 2s linear infinite;
     }
 
     @keyframes bounce {
@@ -55,10 +57,6 @@
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
-    }
-
-    .hamster-spin {
-      animation: spin 1s linear;
     }
 
     h1 {
@@ -82,19 +80,20 @@
     hamster.addEventListener("click", () => {
       clickSound.play();
       body.classList.add("color-change");
+
+      // Wyłącz obracanie
+      hamster.style.animation = "none";
+
+      // Dodaj podskakiwanie
       hamster.classList.add("hamster-bounce");
+
+      // Po podskoku wróć do obracania
       setTimeout(() => {
         hamster.classList.remove("hamster-bounce");
+        hamster.style.animation = "spin 2s linear infinite";
       }, 600);
-    });
-
-    // Scroll event – obracanie chomika
-    window.addEventListener("scroll", () => {
-      hamster.classList.add("hamster-spin");
-      setTimeout(() => {
-        hamster.classList.remove("hamster-spin");
-      }, 1000);
     });
   </script>
 </body>
 </html>
+
