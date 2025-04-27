@@ -95,40 +95,33 @@
     hamster.addEventListener("click", () => {
       clickSound.play();
       body.classList.add("color-change");
-
-      // Wyłącz obracanie
       hamster.style.animation = "none";
-
-      // Po małym czasie dodaj słodkie podskakiwanie
       setTimeout(() => {
         hamster.classList.add("hamster-bounce");
       }, 100);
     });
 
-    // Obrazki do zmiany tła
     const backgrounds = [
-      "chomikchinczyk.jpg",
-      "susi.png",
-      "Zrzut ekranu 2025-04-27 144753.png"
+      { src: "chomikchinczyk.jpg", position: "center top -250px" },
+      { src: "susi.png", position: "center top -200px" },
+      { src: "Zrzut ekranu 2025-04-27 144753.png", position: "center top -230px" }
     ];
     let currentBg = 0;
 
     function changeBackground() {
       overlay.style.opacity = 0;
-
       setTimeout(() => {
-        overlay.style.backgroundImage = `url('${backgrounds[currentBg]}')`;
+        overlay.style.backgroundImage = `url('${backgrounds[currentBg].src}')`;
+        overlay.style.backgroundPosition = backgrounds[currentBg].position;
         overlay.style.opacity = 1;
         currentBg = (currentBg + 1) % backgrounds.length;
       }, 1000);
     }
 
-    // Co 3 sekundy zmiana tła
     setInterval(changeBackground, 3000);
 
-    // Ustaw pierwsze tło od razu
-    overlay.style.backgroundImage = `url('${backgrounds[0]}')`;
-
+    overlay.style.backgroundImage = `url('${backgrounds[0].src}')`;
+    overlay.style.backgroundPosition = backgrounds[0].position;
   </script>
 </body>
 </html>
