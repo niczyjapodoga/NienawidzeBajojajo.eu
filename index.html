@@ -47,14 +47,13 @@
     }
 
     #hamster {
-      width: 80px; /* Mały rozmiar chomika */
-      height: 80px;
+      width: 150px; /* Większy chomik na środku */
+      height: 150px;
       background-image: url('chomiczek.png');
       background-size: cover;
       background-position: center;
       cursor: pointer;
       transition: transform 0.3s ease-in-out; /* Płynna animacja kliknięcia */
-      margin-top: 50px;
     }
 
     /* Animacja podskakiwania */
@@ -80,25 +79,27 @@
       animation: smoothBounce 0.8s ease;
     }
 
-    /* Stylizacja przycisku */
-    .button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 80px; /* Mały przycisk */
-      height: 80px;
-      background-image: url('chomiczek.png'); /* Obrazek chomika jako tło */
+    /* Stylizacja małego chomika po lewej stronie */
+    #smallHamster {
+      width: 60px; /* Mały chomik */
+      height: 60px;
+      background-image: url('chomiczek.png');
       background-size: cover;
       background-position: center;
-      border: none;
+      position: absolute;
+      left: 20px; /* Chomik po lewej stronie */
+      animation: spin 2s linear infinite; /* Animacja kręcenia się chomika */
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animacja dla efektu hover */
-      margin-top: 20px;
     }
 
-    .button:hover {
-      transform: scale(1.1); /* Powiększenie przycisku */
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Cień wokół przycisku */
+    /* Animacja kręcenia się chomika */
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     h1 {
@@ -114,9 +115,9 @@
   <h1></h1>
   <div id="hamster"></div>
 
-  <!-- Przycisk z chomikiem, który przenosi na stronę bajojajo.eu -->
+  <!-- Mały chomik, który przenosi na bajojajo.eu -->
   <a href="https://bajojajo.eu" target="_blank">
-    <button class="button"></button>
+    <div id="smallHamster"></div>
   </a>
 
   <audio id="clickSound" src="pou-no-sound-effect.mp3"></audio>
@@ -124,6 +125,7 @@
 
   <script>
     const hamster = document.getElementById("hamster");
+    const smallHamster = document.getElementById("smallHamster");
     const clickSound = document.getElementById("clickSound");
     const backgroundMusic = document.getElementById("backgroundMusic");
     const body = document.body;
