@@ -76,11 +76,34 @@
       }
     }
 
-    /* Klasa aktywująca animację */
     .hamster-bounce {
-      animation: smoothBounce 0.8s ease; /* Zwiększyłem czas na bardziej gładki efekt */
+      animation: smoothBounce 0.8s ease;
     }
 
+    /* Stylizacja przycisku */
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 150px;
+      height: 150px;
+      background-image: url('chomiczek.png'); /* Obrazek chomika jako tło */
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animacja dla efektu hover */
+      margin-top: 20px;
+    }
+
+    /* Animacja przycisku na hover */
+    .button:hover {
+      transform: scale(1.1); /* Powiększenie przycisku */
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Cień wokół przycisku */
+    }
+
+    /* Stylizacja napisu */
     h1 {
       font-family: Arial, sans-serif;
       color: #333;
@@ -93,6 +116,11 @@
 
   <h1></h1>
   <div id="hamster"></div>
+
+  <!-- Przycisk, który przenosi na stronę bajojajo.eu -->
+  <a href="https://bajojajo.eu" target="_blank">
+    <button class="button"></button>
+  </a>
 
   <audio id="clickSound" src="pou-no-sound-effect.mp3"></audio>
 
