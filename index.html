@@ -35,18 +35,7 @@
       transition: opacity 1s ease-in-out;
     }
 
-    @keyframes colorChange {
-      0% { background-color: #f0f8ff; }
-      25% { background-color: #ffe0e9; }
-      50% { background-color: #d4fc79; }
-      75% { background-color: #a18cd1; }
-      100% { background-color: #f0f8ff; }
-    }
-
-    .color-change {
-      animation: colorChange 3s linear infinite;
-    }
-
+    /* Styl chomika na środku */
     #hamster {
       width: 150px;
       height: 150px;
@@ -56,7 +45,6 @@
       cursor: pointer;
       transition: transform 0.3s ease-in-out;
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Cieniowanie chomika */
-      border-radius: 50%; /* Zaokrąglone rogi dla chomika */
     }
 
     /* Animacja podskakiwania */
@@ -84,7 +72,6 @@
       animation: spin 2s linear infinite;
       cursor: pointer;
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Cieniowanie */
-      border-radius: 50%; /* Zaokrąglone rogi */
     }
 
     /* Animacja kręcenia się chomika */
@@ -112,7 +99,7 @@
   </a>
 
   <audio id="clickSound" src="pou-no-sound-effect.mp3"></audio>
-  <audio id="backgroundMusic" src="world-smallest-violin.mp3"></audio>
+  <audio id="backgroundMusic" src="world-smallest-violin.mp3" loop></audio>
 
   <script>
     const hamster = document.getElementById("hamster");
@@ -124,10 +111,9 @@
 
     // Funkcja uruchamiająca muzykę i efekt animacji
     function playMusicAndAnimate() {
+      // Rozpocznij odtwarzanie muzyki w pętli
       backgroundMusic.play();
-      // Dodanie zmiany koloru tła
-      body.classList.add("color-change");
-
+      
       // Dodanie animacji podskoku
       hamster.classList.add("hamster-bounce");
 
@@ -136,12 +122,6 @@
         hamster.classList.remove("hamster-bounce");
       }, 800); // Czas trwania animacji, aby usunąć klasę po jej zakończeniu
     }
-
-    // Po załadowaniu strony
-    window.onload = () => {
-      // Odtwarzanie muzyki po załadowaniu strony
-      playMusicAndAnimate();
-    };
 
     // Animacja przy kliknięciu w chomika
     hamster.addEventListener("click", () => {
